@@ -11,14 +11,14 @@
       <string>A tolerably okay relational database.</string>
 
       <key>Port</key>
-      <integer><%= scope.lookupvar "postgresql::config::port" %></integer>
+      <integer><%= scope.lookupvar "postgresql::port" %></integer>
     </dict>
 
     <key>ProgramArguments</key>
     <array>
       <string><%= scope.lookupvar "postgresql::config::executable" %></string>
       <string>-p</string>
-      <string><%= scope.lookupvar "postgresql::config::port" %></string>
+      <string><%= scope.lookupvar "postgresql::port" %></string>
       <string>-D</string>
       <string><%= scope.lookupvar "postgresql::config::datadir" %></string>
       <string>-r</string>

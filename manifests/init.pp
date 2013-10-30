@@ -3,7 +3,13 @@
 # Examples
 #
 #   include postgresql
-class postgresql {
+
+# with default port:
+#
+#   class { 'postgresql':
+#     port => 15432
+#   }
+class postgresql($port = 15432){
   include postgresql::config
   include homebrew
   include sysctl
@@ -60,7 +66,7 @@ class postgresql {
     require => File[$boxen::config::envdir]
   }
 
-  $nc = "nc -z localhost ${postgresql::config::port}"
+  $nc = "nc -z localhost ${postgresql::port}"
 
   exec { 'wait-for-postgresql':
     command  => "while ! ${nc}; do sleep 1; done",

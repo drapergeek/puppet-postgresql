@@ -9,12 +9,12 @@ define postgresql::db($ensure = present) {
   exec { "postgresql-db-${name}":
     command => join([
       'createdb',
-      "-p${postgresql::config::port}",
+      "-p${postgresql::port}",
       '-E UTF-8',
       "-O ${::boxen_user}",
       $name
     ], ' '),
     require => Exec['wait-for-postgresql'],
-    unless  => "psql -aA -p${postgresql::config::port} -t -l | cut -d \\| -f 1 | grep -w '${name}'"
+    unless  => "psql -aA -p${postgresql::port} -t -l | cut -d \\| -f 1 | grep -w '${name}'"
   }
 }
